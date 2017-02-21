@@ -1,8 +1,6 @@
 # Arb::Thread
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/arb/thread`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A simple "thread pool" for parallel tasks.
 
 ## Installation
 
@@ -22,7 +20,36 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To illustrate, let's take the example of "The Ticket model".
+
+```ruby
+ require 'arb/thread'
+
+ #Generate "ticket"s here.
+ source=(1..8000).to_a.map{|i| "ticket - #{i}"}
+
+ #Use 30 ticket windows to sell tickets in parallel(30 threads in fact).
+ Thread.parallel(30) do |dispatcher|
+   10000.times do
+     dispatcher.new_task do |lock|
+       #The lock is a just a Mutex instance stored in dispatcher for handy usage.
+       #You can use an external Mutex to synchronize if you like.
+       lock.synchronize do
+         #Sell ticket here.
+         puts source.pop
+       end
+       sleep 3+rand(3)
+     end
+   end
+
+ end
+```
+
+For detailed usage, run
+
+    $ gem unpack arb-thread
+
+and dig into the class Arb::Thread::TaskDispatcher.
 
 ## Development
 

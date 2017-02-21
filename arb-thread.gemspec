@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["arybin"]
   spec.email         = ["arybin@163.com"]
 
-  spec.summary       = %q{Enhance of class Thread.}
-  spec.description   = %q{Enhance of class Thread.}
+  spec.summary       = %q{A simple "thread pool" for parallel tasks.}
+  spec.description   = %q{A simple "thread pool" for parallel tasks.}
   spec.homepage      = "https://github.com/arybin-cn/arb-thread"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
