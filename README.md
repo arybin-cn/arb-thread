@@ -25,12 +25,12 @@ To illustrate, let's take the example of "The Ticket model".
 ```ruby
  require 'arb/thread'
 
- #Generate "ticket"s here.
+ #Generate 8000 tickets here.
  source=(1..8000).to_a.map{|i| "ticket - #{i}"}
 
  #Use 30 ticket windows to sell tickets in parallel(30 threads in fact).
  Thread.parallel(30) do |dispatcher|
-   10000.times do
+   8000.times do
      dispatcher.new_task do |lock|
        #The lock is a just a Mutex instance stored in dispatcher for handy usage.
        #You can use an external Mutex to synchronize if you like.
