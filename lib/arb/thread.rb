@@ -62,7 +62,7 @@ module Arb
     class << ::Thread
       define_method :parallel do |max_thread_count,&blk|
         TaskDispatcher.new(max_thread_count).tap do |dispatcher|
-          blk[dispatcher]
+          blk[dispatcher] if block_given?
         end
       end
     end
